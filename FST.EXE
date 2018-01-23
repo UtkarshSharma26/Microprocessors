@@ -1,0 +1,45 @@
+ The Microsoft MACRO Assembler , Version 1.25          	Page	1-1
+	 	 	 	 	 	 	01-30-;7    
+
+
+1	 0000	 	 	 	DATA SEGMENT
+2	 0000  1234	 	 	N1 DW 1234H
+3	 0002  2134	 	 	N2 DW 2134H
+4	 0004  ????	 	 	RES DW ?
+5	 0006	 	 	 	DATA ENDS
+6	 0000	 	 	 	CODE SEGMENT
+7	 	 	 	 	ASSUME CS: CODE, DS: DATA
+8	 0000  B8 ---- R	 	START: MOV AX, DATA
+9	 0003  8E D8	 	 	MOV DS, AX
+10	 0005  A1 0000 R	 	MOV AX, N1
+11	 0008  8B 1E 0002 R	 	MOV BX, N2
+12	 000C  03 C3	 	 	ADD AX, BX
+13	 000E  A3 0004 R	 	MOV RES, AX
+14	 0011  CD 21	 	 	INT 21H
+15	 0013	 	 	 	CODE ENDS
+16	 	 	 	 	END START
+
+ The Microsoft MACRO Assembler , Version 1.25          	Page	Symbols
+	 	 	 	-1
+	 	 	 	 	 	 	01-30-;7    
+
+
+Segments and groups:
+
+	 	N a m e	 	 	Size	align	combine	class
+
+CODE . . . . . . . . . . . . . .	0013	PARA  	NONE	
+DATA . . . . . . . . . . . . . .	0006	PARA  	NONE	
+
+Symbols:            
+
+	 	N a m e	 	 	Type	Value	Attr         
+
+N1 . . . . . . . . . . . . . . .	L WORD 	0000	DATA
+N2 . . . . . . . . . . . . . . .	L WORD 	0002	DATA
+RES. . . . . . . . . . . . . . .	L WORD 	0004	DATA
+START. . . . . . . . . . . . . .	L NEAR 	0000	CODE
+
+Warning Severe
+Errors	Errors 
+0	0

@@ -1,0 +1,45 @@
+;Assembly(80x86) to change Hex numbers to ASCII
+;Author : Batman
+DATA SEGMENT
+TENS DB ?
+ONES DB ?
+DATA ENDS
+CODE SEGMENT
+ASSUME CS:CODE , DS:DATA
+START: MOV AX,DATA
+	MOV DS,AX
+	MOV AH,01H
+	INT 21H
+	MOV AH,00H
+	SUB AL,'0'
+	MOV CL,10H
+	MUL CL
+	MOV TENS,AL
+
+	MOV AH,01H
+	INT 21H
+	CMP AL,41H
+	JGE SEVEN
+	JMP ZERO
+
+ZERO : ;Subtract 30
+    SUB AL,'0'
+    JMP CONT
+
+SEVEN : ;Subtract 37 because thats how ASCII decided to work
+	SUB AL,'7'
+	JMP CONT
+
+CONT:
+	MOV AH,00H
+	MOV ONES,AL
+	ADD AL,TENS
+	
+	MOV AH,06h
+	MOV DL,AL
+	INT 21h	
+
+	MOV AH,4CH
+	INT 21H
+CODE ENDS
+END START
